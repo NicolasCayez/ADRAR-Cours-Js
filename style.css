@@ -1,4 +1,12 @@
-.clickReact {
-  background-color: aqua;
-  color: chartreuse;
+body{
+	background-color: rgb(44, 44, 44);
+	color: white;
+}
+
+.bg-custom-dark {
+	background-color: rgb(44, 44, 44);
+}
+
+.btn {
+	width: 100px;
 }
