@@ -10,3 +10,7 @@ body{
 .btn {
 	width: 100px;
 }
+
+.resumeCard{
+	min-height: 250px;
+}

@@ -3,7 +3,7 @@ console.log('yeah');
 let title = document.getElementById('headerTitle');
 title.innerText += ' - Liste des exercices';
 
-
+//left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
 let chaineCar1 = "Bonjour";
@@ -36,6 +36,7 @@ let sayHelloWorld2 = function(){
 sayHelloWorld2();`
 code1.innerText = txtCode;
 
+// right part
 let code2 = document.getElementById('txtConsole');
 let txtConsole = `
 Hello World`

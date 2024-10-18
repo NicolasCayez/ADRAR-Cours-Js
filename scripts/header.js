@@ -1,25 +1,33 @@
 // Dom Header
 let header = document.querySelector('header');
-
 // Header style
 header.classList.add(`container-fluid`, 'w-100');
 
-// Template de base
-// Titre
-let title = document.createElement('h1');
-title.id = 'headerTitle';
-title.innerText = 'Cours Js';
-title.classList.add('mx-3', 'my-1', 'col-3', 'fs-3', 'text-light', 'fw-bold');
-header.append(title);
-// Menus dropdown
-/* 
- * generateDropdown(label, listName, childListUrl, childListLabel){}
- * {label} -> label of the dopdown list button
- * {listName} -> name of the dopdown list
- * {childListUrl} -> url of the dropdown first element (list of the other childs)
- * {childListLabel} -> label of the dopdown first element (list of the other childs)
-*/
-function generateDropdown(label, listName, childListUrl, childListLabel){
+/**
+ * creates the title and the click event for redirection
+ */
+export function generateHeaderTitle(){
+    let header = document.querySelector('header');
+    let title = document.createElement('h1');
+    title.id = 'headerTitle';
+    title.innerText = 'Cours Js';
+    title.classList.add('mx-3', 'my-1', 'col-3', 'fs-3', 'text-light', 'fw-bold');
+    header.append(title);
+    //Clicc on the title
+    title.addEventListener('click', () => {
+        window.location.href = ('../../index.html');
+    });
+};
+
+/**
+ * Generates the dropdown buttons with first element (list page)
+ * @function generateHeaderDropdown(label,listName,childListUrl,childListLabel)
+ * @param {label} - Label of the dopdown list button
+ * @param {listName} - Name of the dopdown list
+ * @param {childListUrl} - Url of the dropdown first element (list of the other childs)
+ * @param {childListLabel} - Label of the dopdown first element (list of the other childs)
+ */
+export function generateHeaderDropdown(label, listName, childListUrl, childListLabel){
     // global creation
     let oneDropdown = document.createElement('div');
     oneDropdown.classList.add('dropdown', 'col-1', 'mx-2');
@@ -38,7 +46,7 @@ function generateDropdown(label, listName, childListUrl, childListLabel){
     dropdownList.classList.add ('dropdown-menu', 'dropdown-menu-light');
     oneDropdown.append(dropdownList);
     // first item (list)
-    generateDropdownItem('menu'+listName, childListUrl, childListLabel);
+    generateHeaderDropdownItem('menu'+listName, childListUrl, childListLabel);
     
     let dropdownDivider = document.createElement('li');
     dropdownList.append(dropdownDivider);
@@ -46,35 +54,23 @@ function generateDropdown(label, listName, childListUrl, childListLabel){
     divider.class = 'dropdown-divider';
     dropdownDivider.append(divider);
 }
-/* 
- * generateDropdownItem(menuId, url, label){}
- * {menuId} -> id of parent
- * {url} -> url of the list element page
- * {label} -> label of the list element
-*/
-function generateDropdownItem(menuId, url, label){
-    let parentElement = document.getElementById(menuId);
-    let liItem = document.createElement('li');
-    parentElement.append(liItem);
-    let ItemDetail = document.createElement('a');
-    ItemDetail.classList.add('dropdown-item', 'bg-light', 'active', 'text-dark');
-    ItemDetail.href = url;
-    ItemDetail.innerText = label;
-    liItem.append(ItemDetail);
+
+/**
+ * Generates a dropdown menu element
+ * @function generateHeaderDropdownItem(parentId,url,label)
+ * @param {parentId} - Id of the parent element nesting the card
+ * @param {url} - Url of the list element destination page
+ * @param {label} - Label of the list element
+ */
+export function generateHeaderDropdownItem(parentId, url, label){
+    let parentElement = document.getElementById(parentId);
+    if(parentElement!=null){
+        let liItem = document.createElement('li');
+        parentElement.append(liItem);
+        let ItemDetail = document.createElement('a');
+        ItemDetail.classList.add('dropdown-item', 'bg-light', 'active', 'text-dark');
+        ItemDetail.href = url;
+        ItemDetail.innerText = label;
+        liItem.append(ItemDetail);
+    }
 }
-// Base creation with first list items
-generateDropdown('Cours', 'Lessons', '../../lessons/lessons-list.html', 'Liste des cours');
-generateDropdown('Exos', 'Exos', '../../exo/exo-list.html', 'Liste des exercices');
-generateDropdown('Tp', 'Tp', '../../tp/tp-list.html', 'Liste des Tps');
-
-// Clic sur le titre
-title.addEventListener('click', () => {
-    window.location.href = ('../../index.html');
-})
-
-// new pages
-//lessons
-// Exercises generateDropdownItem('menuExo', url, label);
-generateDropdownItem('menuExos', '../../exo/exo1-variables.html', 'Exo1 - Variables');
-generateDropdownItem('menuExos', '../../exo/exo2-boucles.html', 'Exo2 - Boucles');
-//TPs
