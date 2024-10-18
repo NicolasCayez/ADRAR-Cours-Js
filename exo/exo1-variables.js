@@ -1,8 +1,4 @@
-// Titre
-console.log('yeah');
-let title = document.getElementById('headerTitle');
-title.innerText += ' - Liste des exercices';
-
+import { formatCodeText } from "../scripts/codeTextReplacer";
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -34,10 +30,10 @@ let sayHelloWorld2 = function(){
 }
 
 sayHelloWorld2();`
-code1.innerText = txtCode;
+code1.innerHTML = formatCodeText(txtCode);
 
 // right part
 let code2 = document.getElementById('txtConsole');
 let txtConsole = `
 Hello World`
-code2.innerText = txtConsole;
+code2.innerHTML = txtConsole;

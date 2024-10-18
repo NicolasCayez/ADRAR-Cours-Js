@@ -11,7 +11,7 @@ export function generateHeaderTitle(){
     let title = document.createElement('h1');
     title.id = 'headerTitle';
     title.innerText = 'Cours Js';
-    title.classList.add('mx-3', 'my-1', 'col-3', 'fs-3', 'text-light', 'fw-bold');
+    title.classList.add('mx-3', 'my-1', 'col-1', 'fs-3', 'text-light', 'fw-bold');
     header.append(title);
     //Clicc on the title
     title.addEventListener('click', () => {

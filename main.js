@@ -46,15 +46,16 @@ generateHeaderDropdownItem('menuExos', '../../exo/exo2-calculs.html', 'Exo2 - Ca
 
 //? exos
 // exo-list : parentId = 'exoListCard'
-// exo page : parentId = 'exoText'
+// exo page : parentId = 'textExo' + numero exo (à saisir dans fichier html)
 let textExo1 = `Déclarer, initialiser et afficher en console plusieurs variables de chaque type (chaines de caractères, nombre, nombre a virgule, tableaux, objets)
 Bonus : Faire une variable qui contient une fonction dans laquelle on fait un log console <strong>« Hello World »<strong>`;
 generateCard('exoListCard', 'Exo1 - Variables', textExo1, '../../exo/exo1-variables.html');
-generateDetailText('exoText', textExo1);
+generateDetailText('textExo1', textExo1);
 
 
 let textExo2 = `Mettre en place un programme qui affiche en console le résultat de différents calculs (en utilisant tous les opérateurs de base et des nombres à virgule).
 En plus faire un console log d’un calcul ultra complexe.
 Mettre en place une variable compteur et utiliser tous les opérateur d’assignement composé.`;
 generateCard('exoListCard', 'Exo2 - Calculs', textExo2, '../../exo/exo2-calculs.html');
+generateDetailText('textExo2', textExo2);
 //? tp-list : parentId = 'tpListCard'
