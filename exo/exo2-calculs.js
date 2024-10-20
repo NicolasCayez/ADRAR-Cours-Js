@@ -30,6 +30,7 @@ num +=5;
 // Notation raccourcie incrémentation de 1
 console.log(num++);
 console.log(num--);`
+txtCode = txtCode.replaceAll(`num`,`<font color="aqua">num</font>`);
 code1.innerHTML = formatCodeText(txtCode);
 
 // right part
