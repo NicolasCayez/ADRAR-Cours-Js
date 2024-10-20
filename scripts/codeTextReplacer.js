@@ -25,3 +25,10 @@ export function formatCodeText(text){
                 ;
     return text;
 };
+
+export function formatCodeDeclarations(text, tabWords){
+    tabWords.forEach(word => {
+        text = text.replaceAll(word,`<font color="aqua">` + word + `</font>`);
+    });
+    return text;
+};

@@ -1,4 +1,4 @@
-import { formatCodeText } from "../scripts/codeTextReplacer";
+import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -30,7 +30,8 @@ num +=5;
 // Notation raccourcie incrémentation de 1
 console.log(num++);
 console.log(num--);`
-txtCode = txtCode.replaceAll(`num`,`<font color="aqua">num</font>`);
+
+txtCode = formatCodeDeclarations(txtCode, [`num`]);
 code1.innerHTML = formatCodeText(txtCode);
 
 // right part

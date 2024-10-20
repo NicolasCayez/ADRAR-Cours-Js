@@ -1,4 +1,4 @@
-import { formatCodeText } from "../scripts/codeTextReplacer";
+import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -25,14 +25,9 @@ Merci d'avoir commandé chez la pizerria "Rafinata"
 \${blagues[Math.floor(Math.random()*2)]}\`
 
 console.log(sumUpPhrase);
-`
-txtCode = txtCode.replaceAll(`userName`,`<font color="aqua">userName</font>`)
-                .replaceAll(`pizzaName`,`<font color="aqua">pizzaName</font>`)
-                .replaceAll(`date`,`<font color="aqua">date</font>`)
-                .replaceAll(`adress`,`<font color="aqua">adress</font>`)
-                .replaceAll(`sumUpOrderPhrase`,`<font color="aqua">sumUpOrderPhrase</font>`)
-                .replaceAll(`sumUpPhrase`,`<font color="aqua">saucePiquante</font>`)
-                .replaceAll(`blagues`,`<font color="aqua">blagues</font>`);
+`;
+
+txtCode = formatCodeDeclarations(txtCode, [`userName`, `pizzaName`, `date`, `adress`, `sumUpOrderPhrase`, `sumUpPhrase`, `blagues`]);
 code1.innerHTML = formatCodeText(txtCode);
 
 // right part

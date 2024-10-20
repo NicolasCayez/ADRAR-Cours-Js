@@ -1,4 +1,4 @@
-import { formatCodeText } from "../scripts/codeTextReplacer";
+import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -40,15 +40,9 @@ laPhrase.push(leNom, lePrenom, leNom[0]+lePrenom[0]);
 console.log(laPhrase);
 console.log(laPhrase[0]);
 console.log(laPhrase[1]);
-console.log(laPhrase[2]);`
-txtCode = txtCode.replaceAll(`nom1`,`<font color="aqua">nom1</font>`)
-                .replaceAll(`age1`,`<font color="aqua">age1</font>`)
-                .replaceAll(`passions`,`<font color="aqua">passions</font>`)
-                .replaceAll(`tabUser`,`<font color="aqua">tabUser</font>`)
-                .replaceAll(`tabExo2`,`<font color="aqua">tabExo2</font>`)
-                .replaceAll(`leNom`,`<font color="aqua">leNom</font>`)
-                .replaceAll(`lePrenom`,`<font color="aqua">lePrenom</font>`)
-                .replaceAll(`laPhrase`,`<font color="aqua">laPhrase</font>`);
+console.log(laPhrase[2]);`;
+
+txtCode = formatCodeDeclarations(txtCode, [`nom1`, `age1`, `passions`, `tabUser`, `tabExo2`, `leNom`, `lePrenom`, `laPhrase`]);
 code1.innerHTML = formatCodeText(txtCode);
 
 // right part

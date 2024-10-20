@@ -1,4 +1,4 @@
-import { formatCodeText } from "../scripts/codeTextReplacer";
+import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -22,10 +22,8 @@ function moyenne(noteA, noteB, noteC){
 console.log(moyenne(12, 8, 9));
 console.log(moyenne(12, 17, 19));
 console.log(moyenne(12, 15, 9));`
-txtCode = txtCode.replaceAll(`moyenne`,`<font color="aqua">moyenne</font>`)
-                .replaceAll(`noteA`,`<font color="aqua">noteA</font>`)
-                .replaceAll(`noteB`,`<font color="aqua">noteB</font>`)
-                .replaceAll(`noteC`,`<font color="aqua">noteC</font>`);
+
+txtCode = formatCodeDeclarations(txtCode, [`moyenne`, `noteA`, `noteB`, `noteC`]);
 code1.innerHTML = formatCodeText(txtCode);
 
 // right part

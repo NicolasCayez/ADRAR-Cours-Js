@@ -1,4 +1,4 @@
-import { formatCodeText } from "../scripts/codeTextReplacer";
+import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -14,11 +14,8 @@ function fonctionExo12(nbA,nbB){
 	console.log(nbA+nbB);
 }
 fonctionExo12(2,3);`
-txtCode = txtCode.replaceAll(`fonctionExo11`,`<font color="aqua">fonctionExo11</font>`)
-                .replaceAll(`nb`,`<font color="aqua">nb</font>`)
-                .replaceAll(`nbA`,`<font color="aqua">nbA</font>`)
-                .replaceAll(`nbB`,`<font color="aqua">nbB</font>`)
-                .replaceAll(`fonctionExo12`,`<font color="aqua">fonctionExo12</font>`);
+
+txtCode = formatCodeDeclarations(txtCode, [`fonctionExo11`, `nb`, `nbA`, `nbB`, `fonctionExo12`]);
 code1.innerHTML = formatCodeText(txtCode);
 
 // right part
