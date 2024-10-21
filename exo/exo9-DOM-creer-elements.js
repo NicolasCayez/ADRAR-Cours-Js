@@ -54,5 +54,5 @@ code1.innerHTML = formatCodeText(txtCode);
 // right part
 let code2 = document.getElementById('txtConsole');
 let txtConsole = `
-<img src="../img/exo9.png">r`
+<img src="../img/exo9.png">`
 code2.innerHTML = txtConsole;

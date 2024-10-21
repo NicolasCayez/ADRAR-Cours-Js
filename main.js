@@ -47,14 +47,14 @@ generateHeaderDropdown('TPs', 'Tps', '../../tp/tp-list.html', 'Liste des TPs');
 //? ************************************************************************** //
 let textExo
 //* Exo1 - Variables
-generateHeaderDropdownItem('menuExos', '../../exo/exo1-variables.html', 'Exo1 - Variables');
+generateHeaderDropdownItem('menuExos', '../../exo/exo1-variables.html', 'Exercice 1 - Variables');
 textExo = `Déclarer, initialiser et afficher en console plusieurs variables de chaque type (chaines de caractères, nombre, nombre a virgule, tableaux, objets)
 Bonus : Faire une variable qui contient une fonction dans laquelle on fait un log console <strong>« Hello World »<strong>`;
 generateCard('exoListCard', 'Exo1 - Variables', textExo, '../../exo/exo1-variables.html');
 generateDetailText('textExo1', textExo);
 
 //* Exo2 - Calculs
-generateHeaderDropdownItem('menuExos', '../../exo/exo2-calculs.html', 'Exo2 - Calculs');
+generateHeaderDropdownItem('menuExos', '../../exo/exo2-calculs.html', 'Exercice 2 - Calculs');
 textExo = `Mettre en place un programme qui affiche en console le résultat de différents calculs (en utilisant tous les opérateurs de base et des nombres à virgule).
 <br>En plus faire un console log d’un calcul ultra complexe.
 <br>Mettre en place une variable compteur et utiliser tous les opérateur d’assignement composé.`;
@@ -62,7 +62,7 @@ generateCard('exoListCard', 'Exo2 - Calculs', textExo, '../../exo/exo2-calculs.h
 generateDetailText('textExo2', textExo);
 
 //* Exercice 3 - Phrases
-generateHeaderDropdownItem('menuExos', '../../exo/exo3-phrases.html', 'Exo3 - Phrases');
+generateHeaderDropdownItem('menuExos', '../../exo/exo3-phrases.html', 'Exercice 3 - Phrases');
 textExo = `Le client, le restaurant "La Pizzeria Raffinata" (le client insiste sur les guillemets)nous a choisi pour réaliser son application mobile dans laquelle on peut directement commander en livraison.
 <br>Définissez selon vous toutes les variables pertinentes qui résume la commande d’un utilisateur chez "La Pizzeria Raffinata".
 <br>Vous devez faciliter le travail pour l’équipe du Template et ranger toutes ces variables dans une variable qui se nommera SumUpOrderPhrase, cette phrase devra contenir (on utilise les variables précédentes pour former une phrase) :
@@ -71,7 +71,7 @@ generateCard('exoListCard', 'Exo3 - Phrases', textExo, '../../exo/exo3-phrases.h
 generateDetailText('textExo3', textExo);
 
 //* Exercice 4 - Arrays
-generateHeaderDropdownItem('menuExos', '../../exo/exo4-arrays.html', 'Exo4 - Arrays');
+generateHeaderDropdownItem('menuExos', '../../exo/exo4-arrays.html', 'Exercice 4 - Arrays');
 textExo = `<strong>Exercice 1</strong>
 <br>Créer 1 variable pour un nom,
 <br>Créer une variable pour un âge,
@@ -95,7 +95,7 @@ generateCard('exoListCard', 'Exo4 - Arrays', textExo, '../../exo/exo4-arrays.htm
 generateDetailText('textExo4', textExo);
 
 //* Exercice 5 - Fonctions
-generateHeaderDropdownItem('menuExos', '../../exo/exo5-fonctions.html', 'Exo5 - Fonctions');
+generateHeaderDropdownItem('menuExos', '../../exo/exo5-fonctions.html', 'Exercice 5 - Fonctions');
 textExo = `Créer une fonction qui prend un nombre en paramètre
 <br>La ƒ° doit afficher en console: 33 + le nombre reçu en paramètre
 <br>Créer une autre fonction qui prend 2 nombres en paramètre
@@ -104,7 +104,7 @@ generateCard('exoListCard', 'Exo5 - Fonctions', textExo, '../../exo/exo5-fonctio
 generateDetailText('textExo5', textExo);
 
 //* Exercice 6 - if-Else
-generateHeaderDropdownItem('menuExos', '../../exo/exo6-if-else.html', 'Exo6 - if-Else');
+generateHeaderDropdownItem('menuExos', '../../exo/exo6-if-else.html', 'Exercice 6 - if-Else');
 textExo = `Créer une fonction qui reçoit un tableau de 3 notes ou le tableau des notes (cf exo avant) et qui calcule une moyenne entre ces 3 notes (Tableau de note)
 <br>Dans cette ƒ°, SI la moyenne est supérieure ou égale à 15 on renvoi une string <strong>(très Bien)</strong>
 <br>Dans cette ƒ°, SINON SI la moyenne est supérieure ou égale à 10 on renvoi une string <strong>(assez Bien)</strong>
@@ -113,14 +113,14 @@ generateCard('exoListCard', 'Exercice 6 - if-Else', textExo, '../../exo/exo6-if-
 generateDetailText('textExo6', textExo);
 
 //* Exercice 7 - Objects
-generateHeaderDropdownItem('menuExos', '../../exo/exo7-objects.html', 'Exo7 - Objects');
+generateHeaderDropdownItem('menuExos', '../../exo/exo7-objects.html', 'Exercice 7 - Objects');
 textExo = `Faire l'exo4 en mode objet
 <br>(un objet user avec des propriétés pour le nom age et passions qui est lui aussi un objet avec 2 propriétés`;
 generateCard('exoListCard', 'Exercice 7 - Objects', textExo, '../../exo/exo7-objects.html');
 generateDetailText('textExo7', textExo);
 
 //* Exercice 8 - Boucles
-generateHeaderDropdownItem('menuExos', '../../exo/exo8-boucles.html', 'Exo8 - Boucles');
+generateHeaderDropdownItem('menuExos', '../../exo/exo8-boucles.html', 'Exercice 8 - Boucles');
 textExo = `<strong>JS map phase 1</strong>
 <br>Côté template html rajouter plein de tags \&ltp>
 <br>On va récupérer TOUS les <p> de notre page dans une variable lesTxt via getElementsByTagName
@@ -136,8 +136,8 @@ textExo = `<strong>JS map phase 1</strong>
 generateCard('exoListCard', 'Exercice 8 - Boucles', textExo, '../../exo/exo8-boucles.html');
 generateDetailText('textExo8', textExo);
 
-//* Exercice 9 - DOM
-generateHeaderDropdownItem('menuExos', '../../exo/exo9-DOM.html', 'Exo9 - DOM');
+//* Exercice 9 - DOM - Créer éléments
+generateHeaderDropdownItem('menuExos', '../../exo/exo9-DOM-creer-elements.html', 'Exercice 9 - DOM - créer éléments');
 textExo = `via JS afficher le profil utilisateur dans la page web
 <br>let userData = {
 <br>____name: \`Moss\`,
@@ -146,8 +146,105 @@ textExo = `via JS afficher le profil utilisateur dans la page web
 <br>____hobby: \`paper toss\`,
 <br>____img: \`https://www.hallofseries.com/wp-content/uploads/2021/12/it-crowd.jpg\`
 <br>}`;
-generateCard('exoListCard', 'Exercice 9 - DOM', textExo, '../../exo/exo9-DOM.html');
+generateCard('exoListCard', 'Exercice 9 - DOM - créer éléments', textExo, '../../exo/exo9-DOM-creer-elements.html');
 generateDetailText('textExo9', textExo);
+
+//* Exercice 10 - DOM - Ajout texte
+generateHeaderDropdownItem('menuExos', '../../exo/exo10-DOM-ajout-texte.html', 'Exercice 10 - DOM - Ajout texte');
+textExo = `Créer une ƒ° ajouterTexte qui prend 2 paramètres : pseudo et duTexte
+<br>La fonction a pour but de créer puis remplir et enfin placer un paragraphe contenant pseudo et duTexte, dans la page
+<br>(Bonus) : Dans le paragraphe le pseudo est affiché en gras`;
+generateCard('exoListCard', 'Exercice 10 - DOM - Ajout texte', textExo, '../../exo/exo10-DOM-ajout-texte.html');
+generateDetailText('textExo10', textExo);
+
+//* Exercice 11 - DOM - Ajout texte
+generateHeaderDropdownItem('menuExos', '../../exo/exo11-DOM-reagir-clic-clavier.html', 'Exercice 11 - DOM - React clic et clavier');
+textExo = `<strong>Exercice : réagir au click</strong>
+<br>Dans une page web mettre en place un titre h1, faire en sorte que lorsqu’on click sur le titre celamodifie son texte
+<br><strong>Exercice réagir au click 2</strong>
+<br>Dans une page web mettre en place 1 titre et trois liens ou boutons
+<br>En css créer une classe
+<br>En utilisant les principales fonction de classList ,via JS, faire en sorte que le premier lien AJOUTE la classe css au titre de la page, le second lien SUPPRIME la classe et le troisième lien fais un TOGGLE de la classe sur le titre.
+<br><strong>Exercice : réagir au clavier</strong>
+<br>Dans ce cas là plusieurs évènements s’offrent à nous, keyup, keypress ou keydown,
+<br>Dans une page web : rajouter un formulaire (au moins un textarea)
+<br><strong>Exercice : Réagir au clavier 2</strong>
+<br>Dans une page web on a un input ou textarea, et un bouton, faire en sorte que : Au bout de 5 lettres tapées au clavier cela Désactive le bouton :
+`;
+generateCard('exoListCard', 'Exercice 11 - DOM - React clic et clavier', textExo, '../../exo/exo11-DOM-reagir-clic-clavier.html');
+generateDetailText('textExo11', textExo);
+
+//* Exercice 12 - Classes
+generateHeaderDropdownItem('menuExos', '../../exo/exo12-classes.html', 'Exercice 12 - Classes');
+textExo = `<strong>Exo Class IMC</strong>
+<br>Créer un programme permettant de Calculer l’IMC d’une personne
+<br><strong>Exo Class PME</strong>
+<br>Gérer une PME
+<br>CDC
+<br>Un Salarié a un nom, prénom, âge, salaire mensuel
+<br>Il est payé sur N mois.
+<br>En plus il y a XXX de charges
+<br>Une Pme c’est un nom, une équipe de plusieurs salariés
+<br>Grace à ses ventes elle a des revenus R
+<br>Mais aussi … :
+<br>- des frais fixes FF (impôts etc…)
+<br>- Des frais d’achats de matériel et de logiciels FA
+<br><strong>Exo Class COMPTES BANCAIRES.</strong>
+<br>Enoncé
+<br>Gérer des compte en banque
+`;
+generateCard('exoListCard', 'Exercice 12 - Classes', textExo, '../../exo/exo12-classes.html');
+generateDetailText('textExo12', textExo);
+
+//* Exercice 13 - Contacter API
+generateHeaderDropdownItem('menuExos', '../../exo/exo13-contacter-API.html', 'Exercice 13 - Contacter API');
+textExo = `Avec ce EndPoint d’api
+<br>https://pokeapi.co/api/v2/pokemon
+<br>Affichez dans une page web le nom des 20 premiers Pokemon
+`;
+generateCard('exoListCard', 'Exercice 13 - Contacter API', textExo, '../../exo/exo13-contacter-API.html');
+generateDetailText('textExo13', textExo);
+
+//* Exercice 14 - DOM events
+generateHeaderDropdownItem('menuExos', '../../exo/exo14-DOM-events.html', 'Exercice 14 - DOM events');
+textExo = `<strong>Exercice : réagir à mouseleave</strong>
+<br>Lorsque la souris de l’utilisateur s’en va d’un élément html.
+<br>Dans une page web rajouter un titre (h1, h2 ou h3 au choix) il est en display none en CSS.
+<br>Ensuite sur toute la page surveiller l’évènement mouseleave de manière à faire apparaitre le titre
+<br>en mettant son display en « block » (ajouter d’autre modifications du titre via js notamment au
+<br>niveau du style)
+<br><strong>Exercice DOM SetTimeout</strong>
+<br>Aller se renseigner sur l’utilisation de la fonction setT
+<br>Dans une page web, en utilisant la fonction setTimeout, faire en sorte qu’au bout de 3 secondes
+<br>(soit 3000 ms), un titre apparait sur la page et des modification du style sont effectuées.`;
+generateCard('exoListCard', 'Exercice 14 - DOM events', textExo, '../../exo/exo14-DOM-events.html');
+generateDetailText('textExo14', textExo);
+
+//* Exercice 15 - Regexp
+generateHeaderDropdownItem('menuExos', '../../exo/exo15-Regexp.html', 'Exercice 15 - Regexp');
+textExo = `Dans l’exercice suivant nous allons mettre en place une page web qui comporte un formulaire (1 input pour le mail et un pour le mot de passe, et une div dans laquelle on affichera des messages d’erreur)
+<br>Sur l’input du mail on va surveiller le clavier et utiliser la regex du mail (expliquée précédemment) ainsi que la fonction .test( )
+<br>Si le mail a un format valide Alors on affiche l’input en Vert sinon le mail n’est pas valide et on
+<br>affiche l’input en rouge
+<br>Sur l’input du mot de passe nous allons contrôler la longueur du mot de passe (il doit être compris entre 6 et 8 caractères) auquel cas cela affiche des messages d’erreurs correspondantes
+<br>Ensuite sur cet input nous allons utiliser les regex charDecimal et charSpecial ainsi que la fonction match( ), si le mot de passe ne match pas la regex charDecimal on affiche un message à l’utilisateur, on va faire pareil pour la regex charSpecial.
+<br>Si l’utilisateur à un mot de passe valide on affiche un message de confirmation`;
+generateCard('exoListCard', 'Exercice 15 - Regexp', textExo, '../../exo/exo15-Regexp.html');
+generateDetailText('textExo15', textExo);
+
+//* Exercice 16 - API randomUser
+generateHeaderDropdownItem('menuExos', '../../exo/exo16-API-randomUser.html', 'Exercice 16 - API randomUser');
+textExo = `<strong>Exo API RandomUser</strong>
+// https://randomuser.me/api/
+<br>En js vous aller contacter l'API afin d'afficher les données dans la divCard (si possible en respectant le template)On va afficher 
+<br>l'image de profil
+<br>titre (mr ou mme) le nom le prenom 
+<br>l'email
+<br>l'adresse complete (Num rue nom rue, ville, pays)
+<br>Tél 
+<br>Ensuite on a un button si on click dessus cela recharge la div avec un nouvel utilisateur`;
+generateCard('exoListCard', '16 - API randomUser', textExo, '../../exo/exo16-API-randomUser.html');
+generateDetailText('textExo16', textExo);
 
 //? ************************************************************************** //
 //? TPs                                                                        //
