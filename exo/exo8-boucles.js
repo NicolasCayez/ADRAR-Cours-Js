@@ -7,17 +7,17 @@ import 'highlight.js/styles/github.css';
 let code1 = document.getElementById('txtCode');
 let txtCode = `
 //* JS map phase 1
-// Côté template html rajouter plein de \&ltp>\&lt/p>
+// Côté template html rajouter plein de <p></p>
 /*
-\&ltbody>
-	\&ltdiv id="app">\&lt/div>
-	\&ltscript type="module" src="/main.js">\&lt/script>
-	\&ltdiv id = "exo8">
-		\&ltp>p1\&lt/p>
-		\&ltp>pétwo\&lt/p>
-		\&ltp>péééétroaaaa\&lt/p>
-	\&lt/div>
-\&lt/body>
+<body>
+	<div id="app"></div>
+	<script type="module" src="/main.js"></script>
+	<div id = "exo8">
+		<p>p1</p>
+		<p>pétwo</p>
+		<p>péééétroaaaa</p>
+	</div>
+</body>
 */
 // On va récupérer TOUS les <p> de notre page dans une variable lesTxt via getElementsByTagName
 let lesTxt = document.getElementsByTagName('p');
@@ -29,7 +29,7 @@ console.log(lesTxt);
 // textesTab on va transformer notre htmlCollection en array
 let textesTab = Array.from(lesTxt);
 // On console log la variables textesTab
-// On transforme le HTMLCollection(qui contient tous nos \&ltp>) en Array classique
+// On transforme le HTMLCollection(qui contient tous nos <p>) en Array classique
 console.log(textesTab);
 
 //* JS Map Phase 3 (on peut travailler sur un Array)

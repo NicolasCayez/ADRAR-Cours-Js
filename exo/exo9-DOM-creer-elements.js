@@ -13,7 +13,7 @@ let userData = {
 	hobby: \`paper toss\`,
 	img: \`https://www.hallofseries.com/wp-content/uploads/2021/12/it-crowd.jpg\`
 }
-//\&ltdiv id="userData">\&lt/div>
+//<div id="userData"></div>
 // On récupère "l'adresse" de l'élément
 let userDataDiv = document.querySelector('#userData');
 
