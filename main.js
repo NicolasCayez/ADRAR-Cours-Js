@@ -1,9 +1,22 @@
+import javascriptLogo from './javascript.svg'
 import { generateHeaderTitle, generateHeaderDropdown, generateHeaderDropdownItem } from "./scripts/header";
 import { generateCard } from "./scripts/listPages";
-import { generateDetailText } from "./scripts/detailText";
+import { generateDetailPdf, generateDetailText } from "./scripts/detailText";
 
 // Header title generation
 generateHeaderTitle();
+
+// Main page content
+let welcome = document.getElementById('welcome')
+if(welcome != null){
+    welcome.innerHTML = `
+    <div class="d-flex row">
+        <a class="col-3" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
+        <img src="${javascriptLogo}" class="logo vanilla" height="150px" alt="JavaScript logo" />
+        </a>
+        <h1 class="col mt-auto" >Hub des cours de JavaScript</h1>
+    </div>`
+    }
 
 /**
  * Dropdown menus generation with first element by default (list page)
@@ -13,7 +26,7 @@ generateHeaderTitle();
  * @param {childListUrl} - Url of the dropdown first element (list of the other childs)
  * @param {childListLabel} - Label of the dopdown first element (list of the other childs)
  */
-generateHeaderDropdown('Cours', 'Lessons', '../../lessons/lessons-list.html', 'Liste des cours');
+generateHeaderDropdown('Cours', 'Lessons', '../../lessons/lesson-list.html', 'Liste des cours');
 generateHeaderDropdown('Exos', 'Exos', '../../exo/exo-list.html', 'Liste des exercices');
 generateHeaderDropdown('TPs', 'Tps', '../../tp/tp-list.html', 'Liste des TPs');
 
@@ -39,6 +52,25 @@ generateHeaderDropdown('TPs', 'Tps', '../../tp/tp-list.html', 'Liste des TPs');
 //? lesson-list : parentId = 'lessonListCard'                                  //
 //? lesson pages : parentId = 'textLesson' + numero leçon (à saisir dans html) //
 //? ************************************************************************** //
+let textLesson
+//* Leçon 1 - Intro & Bases
+generateHeaderDropdownItem('menuLessons', '../../lessons/lesson1-intro-bases.html', 'Leçon 1 - Intro & Bases');
+textLesson = `<strong>Présentation de JavaScript</strong>
+<br><strong>Setup + Vite</strong>
+<br><strong>Les variables</strong>
+<br><strong>Nombres / Calculs /Modulo ☺/ Incrémenter / Assignement Composé</strong>
+<br><strong>Chaînes de caractères</strong>
+<br><strong>Les tableaux</strong>
+<br><strong>Fonctions / Fonctions Fléchées / return / paramètres / paramètres par défaut / scope</strong>
+<br><strong>Opérateurs de comparaison / condition ternaire</strong>
+<br><strong>Condition IF ELSE</strong>
+<br><strong>Objets</strong>
+<br><strong>Boucle While / For / ForEach / For …of / For …in / map</strong>
+<br><strong>Spread Operator</strong>
+<br><strong>Gestion des erreurs</strong>`;
+generateCard('lessonListCard', 'Leçon 1 - Intro & Bases', textLesson, '../../lessons/lesson1-intro-bases.html');
+generateDetailText('textLesson1', textLesson);
+generateDetailPdf('pdfLesson1', '../../pdf/lesson1-intro-bases.pdf');
 
 //? ************************************************************************** //
 //? Exercises                                                                  //

@@ -15,6 +15,20 @@ body{
 	min-height: 300px;
 }
 
+embed{
+	max-width: 1024px;
+	align-self: center;
+}
+
+#welcome{
+	width: 800px;
+	margin: auto;
+	margin-top: 30vh;
+	
+}
+
+
+
 /*Edit Exo Firebase*/
 #edit-user-module {
 display: none;
