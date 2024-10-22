@@ -53,6 +53,7 @@ generateHeaderDropdown('TPs', 'Tps', '../../tp/tp-list.html', 'Liste des TPs');
 //? lesson pages : parentId = 'textLesson' + numero leçon (à saisir dans html) //
 //? ************************************************************************** //
 let textLesson
+
 //* Leçon 1 - Intro & Bases
 generateHeaderDropdownItem('menuLessons', '../../lessons/lesson1-intro-bases.html', 'Leçon 1 - Intro & Bases');
 textLesson = `<strong>Présentation de JavaScript</strong>
@@ -71,6 +72,20 @@ textLesson = `<strong>Présentation de JavaScript</strong>
 generateCard('lessonListCard', 'Leçon 1 - Intro & Bases', textLesson, '../../lessons/lesson1-intro-bases.html');
 generateDetailText('textLesson1', textLesson);
 generateDetailPdf('pdfLesson1', '../../pdf/lesson1-intro-bases.pdf');
+
+//* Leçon 2 - DOM
+generateHeaderDropdownItem('menuLessons', '../../lessons/lesson2-dom.html', 'Leçon 2 - DOM');
+textLesson = `<strong>Présentation</strong>
+<br><strong>Sélectionner des éléments du DOM</strong>
+<br><strong>Placer des éléments du DOM</strong>
+<br><strong>Créer - Modifier - Supprimer des éléments du DOM</strong>
+<br><strong>Modifier les attributs des éléments du DOM</strong>
+<br><strong>Gérer les évènements du DOM</strong>
+<br><strong>Web Storage</strong>
+<br><strong>Sélectionner</strong>`;
+generateCard('lessonListCard', 'Leçon 2 - DOM', textLesson, '../../lessons/lesson2-dom.html');
+generateDetailText('textLesson2', textLesson);
+generateDetailPdf('pdfLesson2', '../../pdf/lesson2-dom.pdf');
 
 //? ************************************************************************** //
 //? Exercises                                                                  //
