@@ -1,59 +1,76 @@
-// Titre
-console.log('yeah');
-let title = document.getElementById('headerTitle');
-title.innerText += ' - Liste des exercices';
-
-
+//* ********************************************************************************* //
+//* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
+//* ********************************************************************************* //
+import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+//left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
-let userData = {
-	name: \`Moss\`,
-	email: \`moss@itcrowd.com\`,
-	age: 35,
-	hobby: \`paper toss\`,
-	img: \`https://www.hallofseries.com/wp-content/uploads/2021/12/it-crowd.jpg\`
+let chaineCar1 = "Bonjour";
+let chaineCar2 = "Vous";
+let nb1 = 2;
+let nb2 = -22;
+let nbVirg1 = 5.999999;
+let nbVirg2 = 25.99;
+let tab1 = [chaineCar1, chaineCar2, 3, "Hey hey"];
+let tab2 = [[0,1,2], [3,4,5]];
+
+let obj1 = {
+    firstName1 : "Chuck",
+    lastName1 : "Norris",
+    passion1 : "mettre ses pieds ou il veut, et souvent dans la g****e"};
+
+let obj2 = {
+    libelle2 : "aspirateur",
+    ref2 : "ASPYR0004XT",
+    prixTTC : 259.99};
+        
+let sayHelloWorld = () => {
+    console.log("Hello World");
 }
-//<div id="userData"></div>
-// On récupère "l'adresse" de l'élément
-let userDataDiv = document.querySelector('#userData');
 
-// On crée un élément img, on donne ses attributs
-let picture = document.createElement('img');
-picture.src = userData.img;
-picture.style.maxHeight = '200px';
-// Nom
-let name = document.createElement('H1');
-name.innerText = userData.name;
-// email
-let email = document.createElement('p');
-email.innerText = userData.email;
-// age
-let age = document.createElement('p');
-age.innerText = userData.age;
-// hobby
-let hobby = document.createElement('p');
-hobby.innerText = userData.hobby;
+let sayHelloWorld2 = function(){
+    console.log("Hello World");
+}
 
-// On met en forme
-// le cadre
-userDataDiv.style.color =  'black';
-userDataDiv.style.marginLeft =  '100px';
-userDataDiv.style.padding =  '50px';
-userDataDiv.style.border =  'solid 5px chartreuse';
-userDataDiv.style.borderRadius =  '25px';
-userDataDiv.style.backgroundColor = '#5a5a5a';
-//l'image
-picture.style.border =  'solid 5px chartreuse';
-//le texte sauf le 1er
-email.style.color =  'white';
-age.style.color =  'white';
-hobby.style.color =  'white';
+sayHelloWorld2();`
 
-// on intègre les éléments dans l'odre (sauf indication autre)
-userDataDiv.append(picture, name, email, age, hobby);`
-code1.innerText = txtCode;
+txtCode = formatCodeDeclarations(txtCode, [`chaineCar1`, `chaineCar2`, `nb1`, `nb2`, `nbVirg1`, `nbVirg2`, `tab1`, `tab2`, `obj1`, `firstName1`, `lastName1`, `passion1`, `obj2`, `libelle2`, `ref2`, `prixTTC`, `sayHelloWorld`, `sayHelloWorld2`]);
+code1.innerHTML = formatCodeText(txtCode);
 
-let code2 = document.getElementById('txtConsole');
-let txtConsole = `
-Hello World`
-code2.innerText = txtConsole;
+// right part
+let code2 = document.getElementById('resultDiv');
+let resultDivContent = `
+<div id='monId'>Hello World</div>`
+code2.innerHTML = resultDivContent;
+
+//* ********************************************************************************* //
+//* EXERCICE EN DESSOUS                                                               //
+//* ********************************************************************************* //
+let chaineCar1 = "Bonjour";
+let chaineCar2 = "Vous";
+let nb1 = 2;
+let nb2 = -22;
+let nbVirg1 = 5.999999;
+let nbVirg2 = 25.99;
+let tab1 = [chaineCar1, chaineCar2, 3, "Hey hey"];
+let tab2 = [[0,1,2], [3,4,5]];
+
+let obj1 = {
+    firstName1 : "Chuck",
+    lastName1 : "Norris",
+    passion1 : "mettre ses pieds ou il veut, et souvent dans la g****e"};
+
+let obj2 = {
+    libelle2 : "aspirateur",
+    ref2 : "ASPYR0004XT",
+    prixTTC : 259.99};
+        
+let sayHelloWorld = () => {
+    console.log("Hello World");
+}
+
+let sayHelloWorld2 = function(){
+    console.log("Hello World");
+}
+
+sayHelloWorld2();

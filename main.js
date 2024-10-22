@@ -243,8 +243,15 @@ textExo = `<strong>Exo API RandomUser</strong>
 <br>l'adresse complete (Num rue nom rue, ville, pays)
 <br>Tél 
 <br>Ensuite on a un button si on click dessus cela recharge la div avec un nouvel utilisateur`;
-generateCard('exoListCard', '16 - API randomUser', textExo, '../../exo/exo16-API-randomUser.html');
+generateCard('exoListCard', 'Exercice 16 - API randomUser', textExo, '../../exo/exo16-API-randomUser.html');
 generateDetailText('textExo16', textExo);
+
+//* Exercice 17 - Firebase
+generateHeaderDropdownItem('menuExos', '../../exo/exo17-firebase.html', 'Exercice 17 - Firebase');
+textExo = `<strong>Exo firebase</strong>
+`;
+generateCard('exoListCard', 'Exercice 17 - Firebase', textExo, '../../exo/exo17-firebase.html');
+generateDetailText('textExo17', textExo);
 
 //? ************************************************************************** //
 //? TPs                                                                        //

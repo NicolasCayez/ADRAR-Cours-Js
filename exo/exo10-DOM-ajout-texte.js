@@ -1,3 +1,6 @@
+//* ********************************************************************************* //
+//* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
+//* ********************************************************************************* //
 import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
 //left part
 let code1 = document.getElementById('txtCode');
@@ -18,7 +21,24 @@ txtCode = formatCodeDeclarations(txtCode, [`userData `, `userDataDiv`, `picture`
 code1.innerHTML = formatCodeText(txtCode);
 
 // right part
-let code2 = document.getElementById('txtConsole');
-let txtConsole = `
-***`
-code2.innerHTML = txtConsole;
+let code2 = document.getElementById('resultDiv');
+if(code2 != null){
+	let resultDivContent = `<div id='ajouterTexte'></div>`;
+	code2.innerHTML = resultDivContent;
+}
+
+//* ********************************************************************************* //
+//* EXERCICE EN DESSOUS                                                               //
+//* ********************************************************************************* //
+function ajouterTexte(pseudo, duTexte){
+	let maDiv = document.getElementById('ajouterTexte');
+	if(maDiv != 0){
+		let line = document.createElement('p');
+		line.innerHTML = `<strong>${pseudo}</strong> - ${duTexte}`;
+		maDiv.append(line);
+	}
+};
+ajouterTexte('Daniel','Gracia');
+ajouterTexte('Jarry','Borne');
+ajouterTexte('JCVD','OK');
+ajouterTexte('Dongue','Rodrigue');
