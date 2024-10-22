@@ -1,7 +1,8 @@
 //* ********************************************************************************* //
 //* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
 //* ********************************************************************************* //
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -32,10 +33,9 @@ num +=1;//Notation raccourcie (assignation composé)
 num +=5;
 // Notation raccourcie incrémentation de 1
 console.log(num++);
-console.log(num--);`
+console.log(num--);`;
 
-txtCode = formatCodeDeclarations(txtCode, [`num`]);
-code1.innerHTML = formatCodeText(txtCode);
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');

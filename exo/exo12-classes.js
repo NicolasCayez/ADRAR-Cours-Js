@@ -1,7 +1,8 @@
 //* ********************************************************************************* //
 //* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
 //* ********************************************************************************* //
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -183,10 +184,7 @@ for(let client in accounts){
 	accounts[client].display();
 }`;
 
-txtCode = formatCodeDeclarations(txtCode, [`Imc`, `name`, `weight`, `height`, `imcCalcul`, `display`, `list`]);
-txtCode = formatCodeDeclarations(txtCode, [` Pme`, `team`, `rPme`, `ffPme`, `faPme`, `Bilan`, `Employe`, `firstName`, `lastName`, `age`, `monthlyW`, `duration`, `taxBurden`, `employees`, `maPetiteEntreprise`, `team`, `team`, `team`]);
-txtCode = formatCodeDeclarations(txtCode, [`CompteBancaire`, `name`, `balance`, `isBalanceOk`, `amount`, `credit`, `debit`, `transfert`, `destinationAccount`, `accounts`, `alex`, `clovis`, `marco`, `client`]);
-code1.innerHTML = formatCodeText(txtCode);
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');

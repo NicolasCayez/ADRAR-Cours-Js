@@ -1,4 +1,8 @@
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+//* ********************************************************************************* //
+//* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
+//* ********************************************************************************* //
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -30,8 +34,7 @@ setTimeout(() => {
 	document.body.classList.add("bg-warning");
 }, 3000);`;
 
-txtCode = formatCodeDeclarations(txtCode, [`leTitreInvisible`, `leTitre`, `data`, `Json`, `pokemon`, `unPokemonAffiche`, `results`, `name`]);
-code1.innerHTML = formatCodeText(txtCode);
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');

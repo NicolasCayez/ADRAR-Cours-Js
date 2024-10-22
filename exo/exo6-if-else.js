@@ -1,7 +1,8 @@
 //* ********************************************************************************* //
 //* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
 //* ********************************************************************************* //
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -24,10 +25,9 @@ function moyenne(noteA, noteB, noteC){
 }
 console.log(moyenne(12, 8, 9));
 console.log(moyenne(12, 17, 19));
-console.log(moyenne(12, 15, 9));`
+console.log(moyenne(12, 15, 9));`;
 
-txtCode = formatCodeDeclarations(txtCode, [`moyenne`, `noteA`, `noteB`, `noteC`]);
-code1.innerHTML = formatCodeText(txtCode);
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');

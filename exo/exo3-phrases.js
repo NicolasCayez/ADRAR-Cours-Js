@@ -1,7 +1,8 @@
 //* ********************************************************************************* //
 //* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
 //* ********************************************************************************* //
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -29,8 +30,7 @@ Merci d'avoir commandé chez la pizerria "Rafinata"
 
 console.log(sumUpPhrase);`;
 
-txtCode = formatCodeDeclarations(txtCode, [`userName`, `pizzaName`, `date`, `adress`, `sumUpOrderPhrase`, `sumUpPhrase`, `blagues`]);
-code1.innerHTML = formatCodeText(txtCode);
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');

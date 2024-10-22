@@ -1,4 +1,8 @@
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+//* ********************************************************************************* //
+//* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
+//* ********************************************************************************* //
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //* ****************************************************************************************** /
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,11 +20,8 @@ firebase.initializeApp(firebaseConfig);
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
-;
-`
-
-txtCode = formatCodeDeclarations(txtCode, [`contactApiSecure`, `rawData`, `transformedData`, `randomUser`, `UserCard`, `picture`, `large`, `name`, `title`, `last`, `first`, `email`, `location`, `postcode`, `city`, `state`, `country`, `phone`, `cell`]);
-code1.innerHTML = formatCodeText(txtCode);
+;`;
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');

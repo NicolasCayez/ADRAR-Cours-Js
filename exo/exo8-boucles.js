@@ -1,7 +1,8 @@
 //* ********************************************************************************* //
 //* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
 //* ********************************************************************************* //
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -39,10 +40,9 @@ console.log(textesTab);
 // cette fonction fléchée elle va modifier le innerHTML ou
 // innerText de la variable temporaire
 textesTab = textesTab.map((txt) => txt.innerText);
-console.log(textesTab);`
+console.log(textesTab);`;
 
-txtCode = formatCodeDeclarations(txtCode, [`lesTxt`, `textesTab`]);
-code1.innerHTML = formatCodeText(txtCode);
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');

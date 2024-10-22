@@ -1,7 +1,8 @@
 //* ********************************************************************************* //
 //* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
 //* ********************************************************************************* //
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -32,10 +33,9 @@ let sayHelloWorld2 = function(){
     console.log("Hello World");
 }
 
-sayHelloWorld2();`
+sayHelloWorld2();`;
 
-txtCode = formatCodeDeclarations(txtCode, [`chaineCar1`, `chaineCar2`, `nb1`, `nb2`, `nbVirg1`, `nbVirg2`, `tab1`, `tab2`, `obj1`, `firstName1`, `lastName1`, `passion1`, `obj2`, `libelle2`, `ref2`, `prixTTC`, `sayHelloWorld`, `sayHelloWorld2`]);
-code1.innerHTML = formatCodeText(txtCode);
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');

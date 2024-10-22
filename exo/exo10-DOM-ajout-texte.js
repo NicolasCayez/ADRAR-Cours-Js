@@ -1,7 +1,8 @@
 //* ********************************************************************************* //
 //* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
 //* ********************************************************************************* //
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -15,10 +16,9 @@ ajouterTexte('Daniel','Gracia');
 ajouterTexte('Jarry','Borne');
 ajouterTexte('JCVD','OK');
 ajouterTexte('Dongue','Rodrigue');
-`
+`;
 
-txtCode = formatCodeDeclarations(txtCode, [`userData `, `userDataDiv`, `picture`, `name`, `email`, `age`, `hobby`]);
-code1.innerHTML = formatCodeText(txtCode);
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');

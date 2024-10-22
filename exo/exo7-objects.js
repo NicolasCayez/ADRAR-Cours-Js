@@ -1,7 +1,8 @@
 //* ********************************************************************************* //
 //* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
 //* ********************************************************************************* //
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -22,10 +23,9 @@ console.log(objectUser);
 // En passant par objectUser on veut afficher en console uniquement les passions
 console.log(objectUser.passions);
 // En passant par objectUser on veut afficher en console uniquement la 2ème passion
-console.log(objectUser.passions.passion2);`
+console.log(objectUser.passions.passion2);`;
 
-txtCode = formatCodeDeclarations(txtCode, [`objectUser`, `nom`, `age`, `passions`, `passion1`, `passion2`]);
-code1.innerHTML = formatCodeText(txtCode);
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');

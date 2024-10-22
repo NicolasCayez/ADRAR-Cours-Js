@@ -1,7 +1,8 @@
 //* ********************************************************************************* //
 //* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
 //* ********************************************************************************* //
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -28,8 +29,7 @@ let contactApiPokeDex = async () => {
 
 contactApiPokeDex();`;
 
-txtCode = formatCodeDeclarations(txtCode, [`apiDiv`, `contactApiPokeDex`, `data`, `Json`, `pokemon`, `unPokemonAffiche`, `results`, `name`]);
-code1.innerHTML = formatCodeText(txtCode);
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');

@@ -1,7 +1,8 @@
 //* ********************************************************************************* //
 //* PREMIERE PARTIE : AFFICHAGE HTML - EXERCICE EN DESSOUS                            //
 //* ********************************************************************************* //
-import { formatCodeText, formatCodeDeclarations } from "../scripts/codeTextReplacer";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 //left part
 let code1 = document.getElementById('txtCode');
 let txtCode = `
@@ -49,10 +50,9 @@ age.style.color =  'white';
 hobby.style.color =  'white';
 
 // on intègre les éléments dans l'odre (sauf indication autre)
-userDataDiv.append(picture, name, email, age, hobby);`
+userDataDiv.append(picture, name, email, age, hobby);`;
 
-txtCode = formatCodeDeclarations(txtCode, [`userData `, `userDataDiv`, `picture`, `name`, `email`, `age`, `hobby`]);
-code1.innerHTML = formatCodeText(txtCode);
+code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');
