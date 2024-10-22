@@ -14,3 +14,8 @@ body{
 .resumeCard{
 	min-height: 300px;
 }
+
+/*Edit Exo Firebase*/
+#edit-user-module {
+display: none;
+}
