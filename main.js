@@ -296,7 +296,19 @@ generateDetailText('textExo16', textExo);
 //* Exercice 17 - Firebase
 generateHeaderDropdownItem('menuExos', '../../exo/exo17-firebase.html', 'Exercice 17 - Firebase');
 textExo = `<strong>Exo firebase</strong>
-`;
+<br>
+<br>Nous allons utiliser Javascript avec une base de donnée automatiquement hébergée en ligne,
+Firebase, il s’agit d’une solution proposée par google contenir plein d’outils dont des systèmes de
+base de données, au même titre que AWS (Amazon Web Service) Microsoft Azure, MongoDB ou
+encore le concurrent direct et open-source, Supabase.
+<br>
+<br>Il s’agit d’un BAAS (Backend As A Service), c’est à dire que plutôt que d’avoir à créer et gérer et
+configurer nous même la partie Backend de notre application nous utiliserons celui que Google
+(ou autre) nous met à disposition.
+<br>
+<br>Dans Firebase, il y a donc plusieurs outils mais pour l’exemple nous allons utiliser la
+REALTIME DATABASE (une base de données en temps réel) qui est en NoSQL (Not Only SQL), en
+l’occurence nous allons travailler sur une BDD organisée en JSON.`;
 generateCard('exoListCard', 'Exercice 17 - Firebase', textExo, '../../exo/exo17-firebase.html');
 generateDetailText('textExo17', textExo);
 

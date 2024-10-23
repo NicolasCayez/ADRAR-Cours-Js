@@ -5,29 +5,292 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 //* ****************************************************************************************** /
 // Your web app's Firebase configuration
+
 const firebaseConfig = {
-	apiKey: "AIzaSyABxWxqervcP3rO1nNwwC3y6HWKeduAMco",
-    authDomain: "cours-js-nc.firebaseapp.com",
-    databaseURL: "https://cours-js-nc-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "cours-js-nc",
-    storageBucket: "cours-js-nc.appspot.com",
-    messagingSenderId: "123294309206",
-    appId: "1:123294309206:web:81b29eb55ff0793eca94f7"
+	//import depuis variables d'environnement (pour ne pas partager les credentials sur github par exemple)
+	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 firebase.initializeApp(firebaseConfig);
 //* ****************************************************************************************** /
 
 //left part
 let code1 = document.getElementById('txtCode');
-let txtCode = `
-;`;
+let txtCode = `const firebaseConfig = {
+	//import depuis variables d'environnement (pour ne pas partager les credentials sur github par exemple)
+	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+};
+firebase.initializeApp(firebaseConfig);
+
+//On va créer une référence à notre BDD
+const dbRef = firebase.database().ref();
+// On va également faire une ref directement dans le noeud / """"table""""" users
+const usersRef = dbRef.child("users");
+
+const addUserBtnUI = document.getElementById("add-user-btn"); 
+addUserBtnUI.addEventListener("click", addUserBtnClicked); 
+
+const formUserUI = document.getElementById("add-user-form"); 
+formUserUI.addEventListener("submit", (event) => event.preventDefault()); 
+
+const formUserEditUI = document.getElementById("edit-user-module"); 
+formUserEditUI.addEventListener("submit", (event) => event.preventDefault()); 
+
+const userListUI = document.getElementById("user-list"); 
+const userDetailUI = document.getElementById("user-detail"); 
+readUserData();
+
+
+//\!-------------FIREBASE-------------------
+//\* CREATE (AJOUTER)
+//\TODO 1: Récupérer le bouton avec l'id add-user-btn°
+//\TODO 2: sur ce bouton placer un addEventlistener au click et qui lance la fonction addBtnClicked
+//\TODO 3: Créer la fonction addUserBtnClicked
+//\TODO 5: Dans la ƒ° addUserBtnClicked, Récupérer TOUS LES INPUTS avec laclasse user-input dans 1 variable addUserInputsUI (getElementsByClassName)
+//\TODO 6: Dans la ƒ° addUserBtnClicked, créer une variable newUser (qui est un objet vide)
+//\TODO 7: Dans la ƒ° addUserBtnClicked, faire une boucle for pour parcourir les input dans addUserInputsUI
+//\TODO 8: Dans la Boucle, Pour chaque éléments parcourus on récupère Dans 1 variable key = addUserInputsUI[i].getAttribute('data-key');
+//\TODO 9: Dans la boucle, 1 variable value = addUserInputsUI[I].value
+//\TODO 10: Dans la boucle, Pour chaque clé (âge, name, email) on l'associe à notre nouvel utilisateur :  newUser[key] = value
+//\TODO 11: après le parcours des inputs, sur usersRef on va faire un push de newUser
+//\TODO 12: Dans la ƒ° addUserBtnClicked, on console log un msg type nouvel utilisateur enregistré
+//\TODO 13: Dans la ƒ° addUserBtnClicked, On console log le nom et l'âge du nouvel utilisateur
+//\TODO 14: Dans la ƒ° addUserBtnClicked, On ré initialise le formulaire avec l'id add-user-form
+
+function addUserBtnClicked() {
+    //\* Ensuite on Récupère les 3 inputs (pour renseigner un nom, un age, un mail)
+    const addUserInputsUI = document.getElementsByClassName("user-input");
+    console.log(addUserInputsUI);
+    //\* On crée un objet (vide pour le moment) va stocker les infos du nouvel utilisateur
+    let newUser = {};
+    //\* On fait une boucle pour récupérer les valeurs de chaque input dans le formulaire
+    for (let i = 0; i < addUserInputsUI.length; i++) {
+		//\* Ci dessous on récupère les key et value (on a des attributs data-key déjà placé en html)
+		let key = addUserInputsUI[i].getAttribute("data-key");
+		//\* Pour chaque input on récupère la value.
+		let value = addUserInputsUI[i].value;
+		//\* Pour chaque CLé (age, name, et email on les associe à notre nouvel utilisateur)
+		newUser[key] = value;
+    }
+    //\* Enfin on ajoute notre nouvel utilisateur dans la BDD avec .push()
+    usersRef.push(newUser);
+    console.log("New User SAVED");
+    console.log(\`\${newUser.name} il a \${newUser.age} ans\`);
+    //\* Pour + de confort on reset le formulaire une fois qu'on a ajouté un user
+    formUserUI.reset();
+};
+
+//\* LIRE TOUT LES USERS
+//\TODO : Dans la ƒ° readUserData
+//\TODO : sur la variable usersRef on va utiliser une fonction .on()
+//\? Pour info .on() va s'utiliser comme un addEventListener
+//\TODO : 1er param de .on(), une string "value" (en gros dans la bdd on surveille si ya des changements de value)
+//\TODO : 2e param de .on(), une ƒ° fléchée qui prend un paramètre snap
+//\?  usersRef.on("value", (snap) => {});
+//\TODO : Dans la fonction fléchée : on va assigner une string vide au innerHTML de userListUI
+//\TODO : Sur la variable snap on va utiliser un forEach pour parcourir le tableau avec une variable temporaire childSnap
+//\TODO : Dans le forEach : dans une variable key on va stocker childSnap.key
+//\TODO : Dans le forEach : dans une variable value on va stocker childSnap.val()
+//\TODO : Dans le forEach : dans une variable $li on va créer un element <li></li>
+//\TODO : Dans le forEach : dans le innerHTML de $li on lui assigne value.name
+//\TODO : Dans le forEach : Sur la $li on lui rajoute un attribut 'user-key', on lui assignera la valeur stockée dans key
+//\TODO : Dans le forEach : dans la userListUI on va placer $li
+function readUserData() {
+	usersRef.on("value", (snap) => {
+		userListUI.innerHTML = "";
+		snap.forEach((childSnap) => {
+			//\* Key va stocker les ID
+			let key = childSnap.key;
+			let value = childSnap.val();
+			let $li = document.createElement("li");
+			//\*Phase 4 on fait les icones pour UPDATE
+			let editIconUI=document.createElement('button');
+			editIconUI.innerText = 'Update'
+			editIconUI.setAttribute('class','btn btn-outline-primary mx-3');
+			//\*Phase 5 on fait les icones pour UPDATE
+			let deleteIconUI=document.createElement('button');
+			deleteIconUI.innerText = 'Delete'
+			deleteIconUI.setAttribute('class','btn btn-outline-danger mx-3');
+			//\* Sur les icone en face du nom du user on rajoute un attribut qui contient la key
+			//\* on veut savoir qui on supprime au click
+			deleteIconUI.setAttribute("userid", key);
+			deleteIconUI.addEventListener("click", deleteButtonClicked);
+			//\* Sur les icone en face du nom du user on rajoute un attribut qui contient la key
+			editIconUI.setAttribute("userid", key);
+			editIconUI.addEventListener("click", editButtonClicked);
+			$li.innerText = value.name;
+			$li.append(editIconUI);
+			$li.append(deleteIconUI);
+			$li.setAttribute("user-key", key);
+			$li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center");
+			//\* À la lecture de chaque utilisateur on le rend clickable pour afficher les détails
+			$li.addEventListener("click", userClicked);
+			userListUI.append($li);
+		});
+	});
+}
+
+//\* LIRE 1 USER
+//\TODO: Dans readUserData avant le append(), on va placer un addEventListener sur $li qui écoute « click » et lance la fonction userClicked
+//\? Ensuite dans la fonction userClicked on  capte l'évènement (on s'en sert pour savoir qui on selectionne)
+//\TODO: Dans la ƒ° userClicked, Dans 1 variable userID, on va récupérer userID via event.target.getAttribute("user-key");
+//\TODO: Dans la ƒ° userClicked, 1 variable userRef va faire référence à 1 utilisateur en particulier, on lui assigne dbRef,
+//\? on utilise la fonction child() pour viser le noeud "users/"" concaténé avec userID
+//\TODO: Dans la ƒ° userClicked, 1 variable userDetailUI récupère ma div avec  user-detail
+//\TODO: Dans la ƒ° userClicked, Ensuite sur userRef on utilise la fonction on("value", snap =>{ })
+//\TODO: Dans la ƒ° userClicked, Dans la fonction => , on va vider l'innerHTML de userDetailUI
+//\TODO: Dans la ƒ° userClicked, Ensuite sur snap on va utiliser un forEach pour parcourir le cliché (snap) de notre BDD.
+//\TODO: Dans la ƒ° userClicked dans le forEach, 1 variable $p créée un élément <p>
+//\TODO: Dans la ƒ° userClicked dans le forEach, On rempli le innerHTML de $p avec childSnap.key et childSnap.val()
+//\TODO: Dans la ƒ° userClicked dans le forEach, On rajoute $p dans notre userDetailUI
+function userClicked(event) {
+	//\* on récupère l'id des USERS via l'attribut user-key que l'on a placé
+	//\* durant la lecture de la BDD (cf. la fonciton readUserData(vers la fin, le setAttribute)).
+	let userID = event.target.getAttribute("user-key");
+	console.log(userID);
+	//\* Maintenant qu'on à l'id de l'utilisateur sur lequel on a click
+	//\* on peut viser 1 utilisateur précisément dans la BDD
+	const userRef = dbRef.child("users/" + userID);
+	userRef.on("value", (snap) => {
+		console.log(snap);
+		//\* Par précautions on vide le innerHTML de la div qui affiche les details
+		userDetailUI.innerHTML = "";
+		//\* On parcourt avec un foreach les données d'un user
+		snap.forEach((childSnap) => {
+			console.log(childSnap);
+			//\* pour chaque données on crée un <p></p> (pour l'age, le mail, le name)
+			let $p = document.createElement("p");
+			$p.setAttribute("class", "card-text");
+			$p.innerText = childSnap.key + " - " + childSnap.val();
+			userDetailUI.append($p);
+		});
+	});
+};
+
+//\*UPDATE (EDITER)
+//\! Dans la ƒ° editButtonClicked
+//\TODO: on va modifier le display d formUserEditUI à block 
+//\TODO: on va modifier le display du forUserUI à none 
+//\TODO:  Ensuite on va faire ceci : 
+//\TODO: Une variable inputId qui récupère (querySelector) l'element avec la classe .edit-userid
+//\TODO: A la value de inputId on assigne event.target.getAttribute("userid");
+//\TODO:  Créer une variable userRef on lui assigne dbRef.child('users/' + inputId.value);
+//\TODO:  Dans une variable editUserInputsUI, on récupère tous les éléments de classe edit-user-input (querySelectorAll ou autre)
+//\TODO:  On va parcourir notre BDD avec userRef.on("value", snap => {
+//\TODO: dans la ƒ° fléchée, Faire une boucle for qui parcourt les inputs editUserInputsUI,
+//\TODO: dans la ƒ° fléchée dans la boucle, dans une variable key, on stock editUserInputsUI[i].getAttribute("data-key");
+//\TODO: dans la ƒ° fléchée dans la boucle, Ensuite à chaque valeur de nos editUserInputsUI[i] on assigne snap.val()[key];
+//\TODO:  En dehors de la fonction on(), Dans une variable saveBtn, on récupère notre bouton avec l id édit-user-btn 
+//\TODO:  En dehors de la fonction on(), Sur ce bouton on place un eventListener au click qui lance saveUserBtnClicked
+function editButtonClicked(event) {
+	formUserEditUI.style.display='block';
+	formUserUI.style.display='none';
+	// On récupère l'id de l'input hidden
+	let inputId =document.querySelector(".edit-userid");
+	inputId.value = event.target.getAttribute("userid");
+	//\* on vise le bon user dans la BDD via son ID 
+	const userRef = dbRef.child('users/' + inputId.value);
+	//\* On selectionne les input du formulaire d'édition pour les pré-remplir
+	const editUserInputsUI = document.querySelectorAll(".edit-user-input");
+	userRef.on("value", snap => {
+		//\*Avec une boucle On pré rempli le formulaire pour editer (en récupérant les key et valeurs)
+		for(let i = 0, len = editUserInputsUI.length; i < len; i++) {
+			let key = editUserInputsUI[i].getAttribute("data-key");
+			editUserInputsUI[i].value = snap.val()[key];
+		}
+	});
+	//\* On place un addEventListener sur le bouton 'save' du formulaire 
+	//\* Cela appellera la fonction saveUserBtnClicked qui elle se chargera d'enregistrer en BDD
+	//\* l'utilisateur que l'on vient d'éditer 
+	const saveBtn = document.querySelector("#edit-user-btn");
+	saveBtn.addEventListener("click", saveUserBtnClicked);  
+};
+
+//\*SAVE
+//\TODO : Dans la ƒ° saveUserBtnClicked : 
+//\TODO : Dans une variable userID on récupère la VALUE de l'input avec l'id "edit-userid"
+//\TODO : Dans une variable userRef on fait une référence à l'utilisateur dans la BDD 
+//\TODO : Une variable editedUserObject qui est un objet vide
+//\TODO : Dans une variable editUserInputsUI on récupère TOUS les elements html qui ont la classe "edit-user-input" (querySelectorAll)
+//\TODO : Ensuite on va faire une boucle forEach pour parcourir les editUserInputsUI
+//\TODO : Dans les param de forEach(), on lui passe une fonction qui a une variable textField en paramètre
+//\TODO : Dans cette fonction, dans le forEach on aura une variable key qui va stocker les attributs data-key de textField (getAttribute())
+//\TODO : Pour chaque clé (âge, name, email) on l'associe à notre nouvel utilisateur :  editedUserObject[key] = textField.value 
+//\TODO : Ensuite en dehors de la boucle, sur notre variable userRef on utilise la ƒ° update en lui passant editedUserObject en paramètre
+//\TODO : Enfin on peut remettre le display  à "none" de formUserEditUI et à "block" pour formUserUI
+// --------------------------
+// EDIT - SAVE
+//\? La fonction qui enregistre en BDD les modifs que l'on a fait sur un user
+// --------------------------
+function saveUserBtnClicked() {
+	//\* On récupère l'id de l'utilisateur
+	const userID = document.querySelector(".edit-userid").value;
+	//\* avec cet id on fait une référence à cet utilisateur dans la BDD
+	const userToUpdateRef = dbRef.child('users/' + userID);
+	//\* on crée un objet vide pour le moment
+	let editedUserObject = {};
+	//\* on selectionne tous les input du formulaire d'édition
+	const editUserInputsUI = document.querySelectorAll(".edit-user-input");
+	//\* On fait une boucle sur ces inputs pour remplir notre objet
+	editUserInputsUI.forEach(function(textField) {
+		let key = textField.getAttribute("data-key");
+		//\* On rempli l'objet
+			editedUserObject[key] = textField.value;
+	});
+	//\* Une fois l'objet rempli on l'update dans la BDD
+	userToUpdateRef.update(editedUserObject);
+	console.log("USER UPDATED");
+	//\* pour le confort on fait disparaitre le formulaire d'édition et re apparaitre celui d'ajout
+	formUserEditUI.style.display='none';
+	formUserUI.style.display='block';
+};
+
+//\* SUPPRIMER
+//\TODO 1: Dans la ƒ° readUserData, dans le forEach, juste avant $li.innerHtml = …
+//\TODO 2: Dans la ƒ° readUserData, dans le forEach, On va déclarer une variable deleteIconUI dans laquelle on va créer un élément span
+//\TODO 3: Dans la ƒ° readUserData, dans le forEach, On va ensuite modifier la class de deleteIconUI en « delete-user »
+//\TODO 4: Dans la ƒ° readUserData, dans le forEach, On va remplir le innerHTML de deleteIconUI avec un « X » 
+//\TODO 5: Dans la ƒ° readUserData, dans le forEach, deleteIconUI on lui rajoute un attribut « userid » qui prendra la valeur de key( via setAttribute)
+//\TODO 6: Dans la ƒ° readUserData, dans le forEach, Enfin sur deleteIconUI on place un addEventListener qui écoute le click et lance la fonction deleteButtonClicked
+//\TODO 7: Créer une fonction deleteButtonClicked qui prend event en paramètre 
+//\TODO 8: Dans la ƒ° deleteButtonClicked, récupérer le userID via event.target.getAttribute 
+//\TODO 9: Dans la ƒ° deleteButtonClicked,
+//\TODO9-2: Faire une référence userRef à notre BDD directement sur le noeud de l'utilisateur qu'on a cliqué (référence à la table users + userID)
+//\TODO 10: Dans la ƒ° deleteButtonClicked,utiliser la fonction remove sur userRef
+function deleteButtonClicked(event) {
+	console.log(event);
+	// event.stopPropagation();
+	//\* On récupère l'ID de l'utilisateur que l'on veut supprimer via un getAttribute
+	//\* (cf. la fonciton readUserData(vers la fin, le setAttribute)).
+	let userID = event.target.getAttribute("userid");
+	//\* Dans la BDD on vise 1 user en particulier
+	const userRef = dbRef.child('users/' + userID);
+	//\* Bonus une autre manière de récup le <p></p> qui contient le nom user
+	//\* Enfin sur cet utilisateur on utilise la fonction .remove()
+	userRef.remove();
+};
+
+
+
+`;
 code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');
 let resultDivContent = `
 <div class="row">
-	<!-- add user -->
+	<!-- form add user -->
 	<div class="col-6  p-3">
 		<form class="m-3 bg-info p-3" id="add-user-form">
 			<div class="mb-3">
@@ -44,7 +307,7 @@ let resultDivContent = `
 			</div>
 			<button id="add-user-btn" type="submit" class="btn btn-primary">Ajouter</button>
 		</form>
-		<!-- edit user -->
+		<!-- form edit user -->
 		<form class="m-3 bg-primary p-3" id="edit-user-module">
 			<div class="mb-3">
 				<input data-key="name" type="text" class="edit-userid form-control" hidden>
@@ -99,190 +362,240 @@ addUserBtnUI.addEventListener("click", addUserBtnClicked);
 
 const formUserUI = document.getElementById("add-user-form"); 
 formUserUI.addEventListener("submit", (event) => event.preventDefault()); 
+
 const formUserEditUI = document.getElementById("edit-user-module"); 
-
 formUserEditUI.addEventListener("submit", (event) => event.preventDefault()); 
-const userListUI = document.getElementById("user-list"); 
 
+const userListUI = document.getElementById("user-list"); 
 const userDetailUI = document.getElementById("user-detail"); 
 readUserData();
 
 
+//!-------------FIREBASE-------------------
+//* CREATE (AJOUTER)
+//TODO 1: Récupérer le bouton avec l'id add-user-btn°
+//TODO 2: sur ce bouton placer un addEventlistener au click et qui lance la fonction addBtnClicked
+//TODO 3: Créer la fonction addUserBtnClicked
+//TODO 5: Dans la ƒ° addUserBtnClicked, Récupérer TOUS LES INPUTS avec laclasse user-input dans 1 variable addUserInputsUI (getElementsByClassName)
+//TODO 6: Dans la ƒ° addUserBtnClicked, créer une variable newUser (qui est un objet vide)
+//TODO 7: Dans la ƒ° addUserBtnClicked, faire une boucle for pour parcourir les input dans addUserInputsUI
+//TODO 8: Dans la Boucle, Pour chaque éléments parcourus on récupère Dans 1 variable key = addUserInputsUI[i].getAttribute('data-key');
+//TODO 9: Dans la boucle, 1 variable value = addUserInputsUI[I].value
+//TODO 10: Dans la boucle, Pour chaque clé (âge, name, email) on l'associe à notre nouvel utilisateur :  newUser[key] = value
+//TODO 11: après le parcours des inputs, sur usersRef on va faire un push de newUser
+//TODO 12: Dans la ƒ° addUserBtnClicked, on console log un msg type nouvel utilisateur enregistré
+//TODO 13: Dans la ƒ° addUserBtnClicked, On console log le nom et l'âge du nouvel utilisateur
+//TODO 14: Dans la ƒ° addUserBtnClicked, On ré initialise le formulaire avec l'id add-user-form
 
 function addUserBtnClicked() {
-    //! Exercice : CREATE : Ajouter un nouvel utilisateur
-    //TODO dans la f° addUserBtnClicked, Récupérer TOUS LES INPUTS avec la classe user-input 1 variable addUserInputsUI (getElementByClassName)
-    let addUserInputsUI = document.getElementsByClassName('user-input');
-    //TODO dans la f° addUserBtnClicked, créer une variable newUser (qui est un objet vide)
+    //* Ensuite on Récupère les 3 inputs (pour renseigner un nom, un age, un mail)
+    const addUserInputsUI = document.getElementsByClassName("user-input");
+    console.log(addUserInputsUI);
+    //* On crée un objet (vide pour le moment) va stocker les infos du nouvel utilisateur
     let newUser = {};
-    //TODO dans la f° addUserBtnClicked, faire une boucle for pour parcourir les input dans addUserInputsUI
-    for (const element of addUserInputsUI) {
-        //TODO dans la boucle, pour chaque élément parcouru on récupère une variable key = addUserInputsUI[i].getAttribute('data-key')
-        let key = element.getAttribute('data-key');
-        //TODO dans la boucle, une variable value = addUserInputsUI[i].value
-        let value = element.value;
-        //TODO dans la boucle, pour chaque clé (âge, name, email) on l'associe à notre nouvel utilisateur : newUser[key] = value
-        newUser[key] = value;
+    //* On fait une boucle pour récupérer les valeurs de chaque input dans le formulaire
+    for (let i = 0; i < addUserInputsUI.length; i++) {
+		//* Ci dessous on récupère les key et value (on a des attributs data-key déjà placé en html)
+		let key = addUserInputsUI[i].getAttribute("data-key");
+		//* Pour chaque input on récupère la value.
+		let value = addUserInputsUI[i].value;
+		//* Pour chaque CLé (age, name, et email on les associe à notre nouvel utilisateur)
+		newUser[key] = value;
     }
-    //TODO  après le parcours des inputs, sur userRef on va faire un push de newUser
+    //* Enfin on ajoute notre nouvel utilisateur dans la BDD avec .push()
     usersRef.push(newUser);
-    //TODO  dans la f° addUserBtnClicked, on console log un msg type nouvel utilisateur enregistré
-    console.log('nouvel utilisateur enregistré');
-    //TODO  dans la f° addUserBtnClicked, on console log le nom et l'âge du nouvel utilisateur
-    console.log(`Nom: ${newUser.name}, âge: ${newUser.age}`);
-    //TODO  dans la f° addUserBtnClicked, on réinitialise le formulaire avec l'id add-user-form
-    let form = document.getElementById('add-user-form');
-    console.log('Données envoyées :', form);
-	form[0] = "";
-	form[1] = "";
-	form[2] = "";
+    console.log("New User SAVED");
+    console.log(`${newUser.name} il a ${newUser.age} ans`);
+    //* Pour + de confort on reset le formulaire une fois qu'on a ajouté un user
+    formUserUI.reset();
 };
 
+//* LIRE TOUT LES USERS
+//TODO : Dans la ƒ° readUserData
+//TODO : sur la variable usersRef on va utiliser une fonction .on()
+//? Pour info .on() va s'utiliser comme un addEventListener
+//TODO : 1er param de .on(), une string "value" (en gros dans la bdd on surveille si ya des changements de value)
+//TODO : 2e param de .on(), une ƒ° fléchée qui prend un paramètre snap
+//?  usersRef.on("value", (snap) => {});
+//TODO : Dans la fonction fléchée : on va assigner une string vide au innerHTML de userListUI
+//TODO : Sur la variable snap on va utiliser un forEach pour parcourir le tableau avec une variable temporaire childSnap
+//TODO : Dans le forEach : dans une variable key on va stocker childSnap.key
+//TODO : Dans le forEach : dans une variable value on va stocker childSnap.val()
+//TODO : Dans le forEach : dans une variable $li on va créer un element <li></li>
+//TODO : Dans le forEach : dans le innerHTML de $li on lui assigne value.name
+//TODO : Dans le forEach : Sur la $li on lui rajoute un attribut 'user-key', on lui assignera la valeur stockée dans key
+//TODO : Dans le forEach : dans la userListUI on va placer $li
 function readUserData() {
-    //! Exercice : READ (Lecture de la BDD : Tous Les Utilisateurs)
-	//TODO Dans la f° readUserData
-	//TODO Sur la variable usersRef on va utiliser une fonction .on()
-	//? pour info .on() va s'utiliser comme un eventListener
-	//TODO 1er param de .on(), une string "value" (la bdd vérifie s'il y a des changements de value)
-	//TODO 2ème param de .on(), f° fléchée qui prend le param snap
-	//? usersRef.on("value", (snap) => {})
 	usersRef.on("value", (snap) => {
-		//TODO Dans la f° fléchée, on va assigner une string vide au innerHTML de userListUI
 		userListUI.innerHTML = "";
-		//TODO Sur la variable snap on va utiliser un forEach pour parcourir le tableau avec une variable temporaire childSnap
-		snap.forEach(childSnap => {
-			//TODO Dans le forEach : dans une variable key on va stocker childSnap.key
+		snap.forEach((childSnap) => {
+			//* Key va stocker les ID
 			let key = childSnap.key;
-			//TODO Dans le forEach : dans une variable value on va stocker childSnap.val()
 			let value = childSnap.val();
-			//TODO Dans le forEach : dans une variable $li on va créer un élément<li></li>
-			let $li = document.createElement('li');
-			//* Dans la f° readUserData, dans le forEach, On va déclarer une variable deleteIconUI dans laquelle on va créer un élément span
-			//* Dans la f° readUserData, dans le forEach, On va ensuite modifier la class de deleteIconUI en "delete-user"
-			//* Dans la f° readUserData, dans le forEach, On va remplir le innerHTML de deleteIconUI evec un "X"
-			//* Dans la f° readUserData, dans le forEach, deleteIconUI on lui rajoute un attribut "userid" qui prendra la valeur de key(via setAttribute)
-			//* Dans la f° readUserData, dans le forEach, Enfin sur deleteIconUI on place un AddEventListener qui écoute le click et lance la fonction deleteButtonClicked
+			let $li = document.createElement("li");
 			//*Phase 4 on fait les icones pour UPDATE
 			let editIconUI=document.createElement('button');
-			editIconUI.innerText = 'Update';
+			editIconUI.innerText = 'Update'
 			editIconUI.setAttribute('class','btn btn-outline-primary mx-3');
-			//* Sur les icone en face du nom du user on rajoute un attribut qui contient la key
-			editIconUI.setAttribute("userid", key);
-			editIconUI.addEventListener("click", editButtonClicked);
-			//*Phase 5 on fait les icones pour DELETE
+			//*Phase 5 on fait les icones pour UPDATE
 			let deleteIconUI=document.createElement('button');
-			deleteIconUI.innerText = 'Delete';
+			deleteIconUI.innerText = 'Delete'
 			deleteIconUI.setAttribute('class','btn btn-outline-danger mx-3');
 			//* Sur les icone en face du nom du user on rajoute un attribut qui contient la key
 			//* on veut savoir qui on supprime au click
 			deleteIconUI.setAttribute("userid", key);
 			deleteIconUI.addEventListener("click", deleteButtonClicked);
-			// let deleteIconUI = document.createElement('span');
-			// deleteIconUI.className = "delete-user";
-			// deleteIconUI.innerHTML = "X";
-			// deleteIconUI.setAttribute('userid', key);
-			// deleteIconUI.addEventListener('click', deleteButtonClicked);
-			//TODO Dans le forEach : dans le innerHTML le $li on lui assigne value.name
-			$li.innerHTML = value.name;
-			//TODO Dans le forEach : sur la $li on lui rajoute un attribut 'user-key', on lui assignera la valeur stockée dans key
-			$li.setAttribute("user-key", key);
-			$li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center");
-			//TODO Dans le forEach : dans la userListUI on va placer $li
-			//! Exercice : READ (Lecture d’un élément de la BDD : Afficher 1 utilisateur)
-			//TODO Dans la f° readUserData avant le append(), on va placer un addEventListener sur $li qui écoute "click" et lance la fonction userClicked
-			$li.addEventListener('click', userClicked);
-			userListUI.append($li)
+			//* Sur les icone en face du nom du user on rajoute un attribut qui contient la key
+			editIconUI.setAttribute("userid", key);
+			editIconUI.addEventListener("click", editButtonClicked);
+			$li.innerText = value.name;
 			$li.append(editIconUI);
 			$li.append(deleteIconUI);
+			$li.setAttribute("user-key", key);
+			$li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center");
+			//* À la lecture de chaque utilisateur on le rend clickable pour afficher les détails
+			$li.addEventListener("click", userClicked);
+			userListUI.append($li);
 		});
-	})
-};
+	});
+}
 
+//* LIRE 1 USER
+//TODO: Dans readUserData avant le append(), on va placer un addEventListener sur $li qui écoute « click » et lance la fonction userClicked
+//? Ensuite dans la fonction userClicked on  capte l'évènement (on s'en sert pour savoir qui on selectionne)
+//TODO: Dans la ƒ° userClicked, Dans 1 variable userID, on va récupérer userID via event.target.getAttribute("user-key");
+//TODO: Dans la ƒ° userClicked, 1 variable userRef va faire référence à 1 utilisateur en particulier, on lui assigne dbRef,
+//? on utilise la fonction child() pour viser le noeud "users/"" concaténé avec userID
+//TODO: Dans la ƒ° userClicked, 1 variable userDetailUI récupère ma div avec  user-detail
+//TODO: Dans la ƒ° userClicked, Ensuite sur userRef on utilise la fonction on("value", snap =>{ })
+//TODO: Dans la ƒ° userClicked, Dans la fonction => , on va vider l'innerHTML de userDetailUI
+//TODO: Dans la ƒ° userClicked, Ensuite sur snap on va utiliser un forEach pour parcourir le cliché (snap) de notre BDD.
+//TODO: Dans la ƒ° userClicked dans le forEach, 1 variable $p créée un élément <p>
+//TODO: Dans la ƒ° userClicked dans le forEach, On rempli le innerHTML de $p avec childSnap.key et childSnap.val()
+//TODO: Dans la ƒ° userClicked dans le forEach, On rajoute $p dans notre userDetailUI
 function userClicked(event) {
-    //? Ensuite dans la f° userClicked on capte l'évènement (on s'en sert pour savoir qui on sélectionne)
-    //TODO Dans la f° userClicked, dans une variable userID, on va récupérer userID via event.target.getAttribute("user-key");
+	//* on récupère l'id des USERS via l'attribut user-key que l'on a placé
+	//* durant la lecture de la BDD (cf. la fonciton readUserData(vers la fin, le setAttribute)).
 	let userID = event.target.getAttribute("user-key");
-    //TODO Dans la f° userClicked, 1 variable userRef va faire référence à 1 utilisateur en particulier, on lui assigne dbRef,
-    //? On utilise la f° child() pour viser le noeud "users/" concaténé avec userID
-	let userRef = dbRef.child(`users/${userID}`);
-    //TODO Dans la f° userClicked, 1 variable userDetailUI récupère ma div avec user-detail
-	let userDetailUI = document.getElementById('user-detail');
-    //TODO Dans la f° userClicked, Ensuite sur userRef on utilise la f° .on("value", snap =>{})
-	userRef.on("value", snap =>{
-		//TODO Dans la f° userClicked, dans la f° =>, on va vider l'innerHTML de userDetailUI
+	console.log(userID);
+	//* Maintenant qu'on à l'id de l'utilisateur sur lequel on a click
+	//* on peut viser 1 utilisateur précisément dans la BDD
+	const userRef = dbRef.child("users/" + userID);
+	userRef.on("value", (snap) => {
+		console.log(snap);
+		//* Par précautions on vide le innerHTML de la div qui affiche les details
 		userDetailUI.innerHTML = "";
-		//TODO Dans la f° userClicked, Ensuite sur snap on va utiliser un forEach pour parcourir le cliché (snap) de notre BDD.
-		snap.forEach(childSnap =>{
-			//TODO Dans la f° userClicked, dans le forEach, 1 variable $p crée un élément <p>
-			let $p = document.createElement('p');
-			//TODO Dans la f° userClicked, dans le forEach, On rempli le innerHTML de $p avec childSnap.key et childSnap.val()
-			$p.innerHTML = `${childSnap.key} : ${childSnap.val()}`;
-			//TODO Dans la f° userClicked, dans le forEach, On rajoute $p dans notre userDetailUI
+		//* On parcourt avec un foreach les données d'un user
+		snap.forEach((childSnap) => {
+			console.log(childSnap);
+			//* pour chaque données on crée un <p></p> (pour l'age, le mail, le name)
+			let $p = document.createElement("p");
+			$p.setAttribute("class", "card-text");
+			$p.innerText = childSnap.key + " - " + childSnap.val();
 			userDetailUI.append($p);
-		})
-	})
-};
-
-function editButtonClicked(event) {
-	//!Exercice : READ (Lecture d’un element de la BDD : Pré-remplir le formulaire d’un utilisateur)
-	//TODO On va modifier le display du formUserEditUI à "block"
-	formUserEditUI.style.display = 'block';
-	//TODO On va modifier le display du formUserUI à "none"
-	formUserUI.style.display = 'none';
-	//TODO Ensuite on va faire ceci
-	//TODO Une variable inputId qui récupère (querySelector) l'élément avec la classe .edit-userid
-	let inputId = document.querySelector('.edit-userid');
-	//TODO A la value de inputId on assigne event.target.getAttribute("userid");
-	inputId.value = event.target.getAttribute("userid");
-	//TODO Dans une variable editUserInputUI, on récupère tous les éléments de classe edit-user-input (querySelectorAll ou autre)
-	let editUserInputUI = document.getElementsByClassName('edit-user-input');
-	//TODO On va parcourir notre BDD avec userRef.on("value", snap => {
-	let userRef = dbRef.child(`users/${inputId}`);
-	userRef.on("value", snap => {
-		//TODO Dans la f° fléchée, faire une boucle for qui parcourt les inputs editUsetInputUI,
-		for(let i=0; i<editUserInputUI.length; i++){
-			//TODO Dans la f° fléchée dans la boucle, dans une variable key, on stock editUserInputsUI[i].getAttribute("data-key");
-			let key = editUserInputUI[i].getAttribute("data-key");
-			//TODO Dans la f° fléchée dans la boucle, ensuite à chaque valeur de nos editUserInputsUI[i] on assigne snap.val()[key];
-			editUserInputUI[i] = snap.val()[key];
-		}
-	//TODO en dehors de la fonction on(), dans une variable saveBtn, on récupère notre bouton avec l'id edit-user-btn
-	let saveBtn = document.getElementById('edit-user-btn');
-	//TODO en dehors de la fonction on(), sur ce bouton on place un eventlistener au click qui lance saveUserBtnClicked
-	saveBtn.addEventListener('click', saveUserBtnClicked());
+		});
 	});
 };
 
-function saveUserBtnClicked() {
-	    //TODO Dans la f° saveUserBtnClicked()
-        //TODO Dans une variable userID on récupère la value de l'input avec l'id "edit-userid"
-        let userID = document.querySelector('#edit-userid').value;
-        //TODO Dans une variable userRef on fait référence à l'utilisateur dans la BDD
-        let userRef = dbRef.child(`users/${userID}`);
-        //TODO Une variable editUserObject qui est un objet vide
-        let editUserObject = {};
-        //TODO Dans une variable editUserInputUI, on récupère tous les éléments html qui ont la classe edit-user-input (querySelectorAll ou autre)
-        let editUserInputUI = document.querySelectorAll('.edit-user-input');
-        //TODO ensuite on va faire une boucle forEach pour parcourir les editUserInputUI
-        //TODO Dans les param du forEach(), on lui laisse une f° qui a une variable textField en paramètre
-        editUserInputUI.forEach(textField =>{
-            //TODO Dans cette f°, dans leforEach on aura une variable key qui va stocker les attributs data-key de textField (getAttribute())
-            let key = editUserInputUI.textfield.getAttribute("data-key");
-            //TODO Pour chaque clé (âge, name, email) on l'associe à notre nouvel utilisateur : editUserObject[key] = textField.value
-            editUserObject[key] = textField.value;
-        });
-        //TODO ensuite en dehors de la boucle, sur notre variable userRef on utilise la f° update en lui passant editUserObject en paramètre
-        userRef.update(editUserObject);
-        //TODO Enfin on peut remettre le display à "none" de formUserEditUI et à "block" de forUserUI
-        formUserEditUI.style.display = "none";
-        formUserUI.style.display = "block";
+//*UPDATE (EDITER)
+//! Dans la ƒ° editButtonClicked
+//TODO: on va modifier le display d formUserEditUI à block 
+//TODO: on va modifier le display du forUserUI à none 
+//TODO:  Ensuite on va faire ceci : 
+//TODO: Une variable inputId qui récupère (querySelector) l'element avec la classe .edit-userid
+//TODO: A la value de inputId on assigne event.target.getAttribute("userid");
+//TODO:  Créer une variable userRef on lui assigne dbRef.child('users/' + inputId.value);
+//TODO:  Dans une variable editUserInputsUI, on récupère tous les éléments de classe edit-user-input (querySelectorAll ou autre)
+//TODO:  On va parcourir notre BDD avec userRef.on("value", snap => {
+//TODO: dans la ƒ° fléchée, Faire une boucle for qui parcourt les inputs editUserInputsUI,
+//TODO: dans la ƒ° fléchée dans la boucle, dans une variable key, on stock editUserInputsUI[i].getAttribute("data-key");
+//TODO: dans la ƒ° fléchée dans la boucle, Ensuite à chaque valeur de nos editUserInputsUI[i] on assigne snap.val()[key];
+//TODO:  En dehors de la fonction on(), Dans une variable saveBtn, on récupère notre bouton avec l id édit-user-btn 
+//TODO:  En dehors de la fonction on(), Sur ce bouton on place un eventListener au click qui lance saveUserBtnClicked
+function editButtonClicked(event) {
+	formUserEditUI.style.display='block';
+	formUserUI.style.display='none';
+	// On récupère l'id de l'input hidden
+	let inputId =document.querySelector(".edit-userid");
+	inputId.value = event.target.getAttribute("userid");
+	//* on vise le bon user dans la BDD via son ID 
+	const userRef = dbRef.child('users/' + inputId.value);
+	//* On selectionne les input du formulaire d'édition pour les pré-remplir
+	const editUserInputsUI = document.querySelectorAll(".edit-user-input");
+	userRef.on("value", snap => {
+		//*Avec une boucle On pré rempli le formulaire pour editer (en récupérant les key et valeurs)
+		for(let i = 0, len = editUserInputsUI.length; i < len; i++) {
+			let key = editUserInputsUI[i].getAttribute("data-key");
+			editUserInputsUI[i].value = snap.val()[key];
+		}
+	});
+	//* On place un addEventListener sur le bouton 'save' du formulaire 
+	//* Cela appellera la fonction saveUserBtnClicked qui elle se chargera d'enregistrer en BDD
+	//* l'utilisateur que l'on vient d'éditer 
+	const saveBtn = document.querySelector("#edit-user-btn");
+	saveBtn.addEventListener("click", saveUserBtnClicked);  
 };
 
+//*SAVE
+//TODO : Dans la ƒ° saveUserBtnClicked : 
+//TODO : Dans une variable userID on récupère la VALUE de l'input avec l'id "edit-userid"
+//TODO : Dans une variable userRef on fait une référence à l'utilisateur dans la BDD 
+//TODO : Une variable editedUserObject qui est un objet vide
+//TODO : Dans une variable editUserInputsUI on récupère TOUS les elements html qui ont la classe "edit-user-input" (querySelectorAll)
+//TODO : Ensuite on va faire une boucle forEach pour parcourir les editUserInputsUI
+//TODO : Dans les param de forEach(), on lui passe une fonction qui a une variable textField en paramètre
+//TODO : Dans cette fonction, dans le forEach on aura une variable key qui va stocker les attributs data-key de textField (getAttribute())
+//TODO : Pour chaque clé (âge, name, email) on l'associe à notre nouvel utilisateur :  editedUserObject[key] = textField.value 
+//TODO : Ensuite en dehors de la boucle, sur notre variable userRef on utilise la ƒ° update en lui passant editedUserObject en paramètre
+//TODO : Enfin on peut remettre le display  à "none" de formUserEditUI et à "block" pour formUserUI
+// --------------------------
+// EDIT - SAVE
+//? La fonction qui enregistre en BDD les modifs que l'on a fait sur un user
+// --------------------------
+function saveUserBtnClicked() {
+	//* On récupère l'id de l'utilisateur
+	const userID = document.querySelector(".edit-userid").value;
+	//* avec cet id on fait une référence à cet utilisateur dans la BDD
+	const userToUpdateRef = dbRef.child('users/' + userID);
+	//* on crée un objet vide pour le moment
+	let editedUserObject = {};
+	//* on selectionne tous les input du formulaire d'édition
+	const editUserInputsUI = document.querySelectorAll(".edit-user-input");
+	//* On fait une boucle sur ces inputs pour remplir notre objet
+	editUserInputsUI.forEach(function(textField) {
+		let key = textField.getAttribute("data-key");
+		//* On rempli l'objet
+			editedUserObject[key] = textField.value;
+	});
+	//* Une fois l'objet rempli on l'update dans la BDD
+	userToUpdateRef.update(editedUserObject);
+	console.log("USER UPDATED");
+	//* pour le confort on fait disparaitre le formulaire d'édition et re apparaitre celui d'ajout
+	formUserEditUI.style.display='none';
+	formUserUI.style.display='block';
+};
+
+//* SUPPRIMER
+//TODO 1: Dans la ƒ° readUserData, dans le forEach, juste avant $li.innerHtml = …
+//TODO 2: Dans la ƒ° readUserData, dans le forEach, On va déclarer une variable deleteIconUI dans laquelle on va créer un élément span
+//TODO 3: Dans la ƒ° readUserData, dans le forEach, On va ensuite modifier la class de deleteIconUI en « delete-user »
+//TODO 4: Dans la ƒ° readUserData, dans le forEach, On va remplir le innerHTML de deleteIconUI avec un « X » 
+//TODO 5: Dans la ƒ° readUserData, dans le forEach, deleteIconUI on lui rajoute un attribut « userid » qui prendra la valeur de key( via setAttribute)
+//TODO 6: Dans la ƒ° readUserData, dans le forEach, Enfin sur deleteIconUI on place un addEventListener qui écoute le click et lance la fonction deleteButtonClicked
+//TODO 7: Créer une fonction deleteButtonClicked qui prend event en paramètre 
+//TODO 8: Dans la ƒ° deleteButtonClicked, récupérer le userID via event.target.getAttribute 
+//TODO 9: Dans la ƒ° deleteButtonClicked,
+//TODO9-2: Faire une référence userRef à notre BDD directement sur le noeud de l'utilisateur qu'on a cliqué (référence à la table users + userID)
+//TODO 10: Dans la ƒ° deleteButtonClicked,utiliser la fonction remove sur userRef
 function deleteButtonClicked(event) {
-	//TODO dans la f°, récupérer le userID via event.target.getAttribute("userid")
+	console.log(event);
+	// event.stopPropagation();
+	//* On récupère l'ID de l'utilisateur que l'on veut supprimer via un getAttribute
+	//* (cf. la fonciton readUserData(vers la fin, le setAttribute)).
 	let userID = event.target.getAttribute("userid");
-    //TODO dans la f°, faire une référence userRef à notre BDD directement sur le noeud de l'utilisateur qu'on a cliqué (référence à la table users + userID)
-	let userRef = dbRef.child(`users/${userID}`);
-    //TODO Dans la f°, utiliser la f° remove sur userRef
-	console.log("delete");
-}
+	//* Dans la BDD on vise 1 user en particulier
+	const userRef = dbRef.child('users/' + userID);
+	//* Bonus une autre manière de récup le <p></p> qui contient le nom user
+	//* Enfin sur cet utilisateur on utilise la fonction .remove()
+	userRef.remove();
+};
