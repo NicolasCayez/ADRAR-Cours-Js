@@ -38,8 +38,8 @@ code1.innerHTML = hljs.highlight('js', txtCode).value;
 
 // right part
 let code2 = document.getElementById('resultDiv');
-let resultDivContent = `
-<div id='monId'>Hello World</div>`
+let resultDivContent = `<h1 id="leTitreInvisible" style="display:none">Le titre invisible</h1>
+<h1 id="leTitre" style="display:none">Le titre qui apparait tout seul</h1>`
 code2.innerHTML = resultDivContent;
 
 //* ********************************************************************************* //
