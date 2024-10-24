@@ -15,7 +15,7 @@ export function generateHeaderTitle(){
     header.append(title);
     //Clicc on the title
     title.addEventListener('click', () => {
-        window.location.href = ('../../index.html');
+        window.location.href = ('/index.html');
     });
 };
 
